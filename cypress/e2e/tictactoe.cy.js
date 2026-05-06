@@ -169,9 +169,21 @@ describe("template spec", () => {
     }
   });
 
-  // 10. feladat: Új játék
-  // párosra mindig x / ellentétje
-  // 11. feladat: Játék leállása győzelem után
+  it("páros lépéseknél X, páratlan lépéseknél O kerül a mezőbe?", function () {
+    cy.visit("https://hrvthlevi.github.io/tictactoeJS--260326/");
+
+    for (let i = 0; i < 6; i++) {
+      cy.get(".jatekter .elem").eq(i).click();
+
+      if (i % 2 === 0) {
+        cy.get(".jatekter .elem").eq(i).should("include.text", "X");
+        cy.get(".jatekter .elem").eq(i).should("not.include.text", "O");
+      } else {
+        cy.get(".jatekter .elem").eq(i).should("include.text", "O");
+        cy.get(".jatekter .elem").eq(i).should("not.include.text", "X");
+      }
+    }
+  });
 
   // +++ Átló, vízszintes, függőleges győzelmek ell másik irányból
 
